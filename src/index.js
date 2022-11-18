@@ -3,7 +3,7 @@ import './css/styles.css';
 import { fetchCountries } from './js/countries-api';
 import { Notify } from 'notiflix';
 
-const DEBOUNCE_DELAY = 800;
+const DEBOUNCE_DELAY = 300;
 const inputEl = document.querySelector('#search-box');
 const countriesListEl = document.querySelector('.country-list');
 const countriesInfoEl = document.querySelector('.country-info');
