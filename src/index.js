@@ -34,7 +34,7 @@ function renderData(data) {
   }
 
   // Render case for countries range below | console.log(data);
-  if (data.length > 2 && data.length < 10) {
+  if (data.length >= 2 && data.length <= 10) {
     const countryList = data.map(el => {
       return `
         <li>
@@ -48,6 +48,9 @@ function renderData(data) {
   }
 
   // ELSE Render case for exact one country | console.log(data[0]);
+  const langs = Object.values(data[0].languages)
+    .toString()
+    .replaceAll(',', ', ');
   const countryInfo = `
     <div>
       <img src="${data[0].flags.svg}"
@@ -57,7 +60,7 @@ function renderData(data) {
     </div>
     <p><b>Capital:</b> ${data[0].capital}</p>
     <p><b>Population:</b> ${data[0].population}</p>
-    <p><b>Languages:</b> ${Object.values(data[0].languages)}</p>
+    <p><b>Languages:</b> ${langs}</p>
   `;
   clearRenderedData();
   countriesInfoEl.innerHTML = countryInfo;
