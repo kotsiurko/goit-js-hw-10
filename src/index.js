@@ -18,10 +18,13 @@ function onInputEnter(event) {
         renderData(data);
       })
       .catch(error => {
-        Notify.failure('Oops, there is no country with that name');
-        // console.log(error);
+        if (err.message === '404') {
+          Notify.failure('Oops, there is no country with that name');
+          clearRenderedData();
+        }
       });
   }
+  clearRenderedData();
 }
 
 // Function that renders data on HTML
@@ -37,8 +40,8 @@ function renderData(data) {
   if (data.length >= 2 && data.length <= 10) {
     const countryList = data.map(el => {
       return `
-        <li>
-          <img src="${el.flags.svg}" alt="${el.name.official} flag" width="30px"/>
+        <li class="country-header">
+          <img src="${el.flags.svg}" alt="${el.name.official} flag" width="60px" height="40px"/>
           <h2>${el.name.official}</h2>
         </li>`;
     });
@@ -52,10 +55,10 @@ function renderData(data) {
     .toString()
     .replaceAll(',', ', ');
   const countryInfo = `
-    <div>
+    <div class="country-header">
       <img src="${data[0].flags.svg}"
           alt="${data[0].name.official} flag"
-          width="60px"/>
+          width="60px" height="40px"/>
       <h2>${data[0].name.official}</h2>
     </div>
     <p><b>Capital:</b> ${data[0].capital}</p>
