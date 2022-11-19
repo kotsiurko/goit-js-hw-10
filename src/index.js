@@ -12,13 +12,13 @@ inputEl.addEventListener('input', debounce(onInputEnter, DEBOUNCE_DELAY));
 // Input Handler Function
 function onInputEnter(event) {
   const countryQuery = event.target.value.trim();
-  if (countryQuery.length !== 0) {
+  if (countryQuery) {
     fetchCountries(countryQuery)
       .then(data => {
         renderData(data);
       })
       .catch(error => {
-        if (err.message === '404') {
+        if (error.message === '404') {
           Notify.failure('Oops, there is no country with that name');
           clearRenderedData();
         }
